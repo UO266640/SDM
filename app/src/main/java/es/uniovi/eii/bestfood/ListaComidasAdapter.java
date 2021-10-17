@@ -60,7 +60,7 @@ public class ListaComidasAdapter extends RecyclerView.Adapter<ListaComidasAdapte
 
         public void bindUser(final Comida comida, final OnItemClickListener listener) {
             nombre.setText(comida.getNombre());
-            puntuacion.setText(new StringBuilder().append(comida.getPuntuacion()).append(puntuacion.getContext().getString(R.string.puntos)).toString());
+            puntuacion.setText(new StringBuilder().append(comida.getPuntuacion()).append(" ").append(puntuacion.getContext().getString(R.string.puntos)).toString());
 
             // Picasso.get().load(comida.getUrlCaratula()).into(imagen);
 
