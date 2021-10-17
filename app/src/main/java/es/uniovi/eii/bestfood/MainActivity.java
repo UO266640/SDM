@@ -1,5 +1,6 @@
 package es.uniovi.eii.bestfood;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -56,9 +57,10 @@ public class MainActivity extends AppCompatActivity {
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void clickonItem(Comida comida) {
-        //Intent intent = new Intent(MainActivity.this, ShowComida.class);
+
+        Intent intent = new Intent(MainActivity.this, PropiedadesActivity.class);
         //intent.putExtra(COMIDA_SELECIONADA, peli);
-        //startActivity(intent));
+        startActivity(intent);
     }
 
 }
