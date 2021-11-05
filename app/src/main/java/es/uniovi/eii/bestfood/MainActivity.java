@@ -38,9 +38,8 @@ public class MainActivity extends AppCompatActivity {
         añadir = findViewById(R.id.floatingActionButton);
 
         añadir.setOnClickListener(view -> {
-            //  Intent intent = new Intent(MainRecycler.this, MainActivity.class);
-            //   startActivity(intent);
-
+             Intent intent = new Intent(MainActivity.this, BarcodeScanner.class);
+              startActivity(intent);
         });
     }
 
