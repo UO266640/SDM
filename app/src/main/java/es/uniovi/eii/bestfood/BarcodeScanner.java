@@ -7,7 +7,9 @@ import android.Manifest;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
+import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
@@ -20,7 +22,16 @@ import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 public class BarcodeScanner extends AppCompatActivity {
 
@@ -98,10 +109,16 @@ public class BarcodeScanner extends AppCompatActivity {
                             intentData = barcodes.valueAt(0).displayValue;
                             txtBarcodeValue.setText(intentData);
                         }
+                        readProperties(intentData);
                     });
                 }
             }
         });
+    }
+
+    private void readProperties(String intentData) {
+        new JsonTask().execute("https://world.openfoodfacts.org/api/v2/product/" + intentData + ".json");
+
     }
 
 
@@ -116,4 +133,6 @@ public class BarcodeScanner extends AppCompatActivity {
         super.onResume();
         initialiseDetectorsAndSources();
     }
+
+
 }
