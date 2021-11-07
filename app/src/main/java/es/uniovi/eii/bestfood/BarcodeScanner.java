@@ -224,6 +224,7 @@ public class BarcodeScanner extends AppCompatActivity {
                     intent.putExtra(COMIDA_SELE, comida);
                     startActivity(intent);
                     finish = true;
+                    finish();
                 }
 
 
