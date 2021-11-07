@@ -34,7 +34,7 @@ import javax.net.ssl.HttpsURLConnection;
 
 public class MainActivity extends AppCompatActivity {
 
-    List<Comida> listaComida;
+    List<Comida>  listaComida;
     Comida comida;
     RecyclerView listaComidaView;
     private FloatingActionButton añadir;
@@ -65,21 +65,21 @@ public class MainActivity extends AppCompatActivity {
 
     private void rellenarLista() {
         listaComida = new ArrayList<Comida>();
-        Comida comida = new Comida("Cocacola", 0);
-        Comida comida2 = new Comida("Cereales", 50);
+        Comida comida = new Comida("Cocacola", "0");
+        Comida comida2 = new Comida("Cereales", "50");
 
         listaComida.add(comida);
         listaComida.add(comida2);
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void clickonItem(Comida comida) {
 
         Intent intent = new Intent(MainActivity.this, PropiedadesActivity.class);
         //intent.putExtra(COMIDA_SELECIONADA, peli);
         startActivity(intent);
     }
+
 
 
 }

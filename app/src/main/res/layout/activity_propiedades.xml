@@ -29,14 +29,14 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/titulopeli"
+                android:id="@+id/NombreComida"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/nombrecomida"
                 android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
             <TextView
-                android:id="@+id/fechaestreno"
+                android:id="@+id/marca"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/marca"
@@ -49,10 +49,10 @@
                 android:text="0/10" />
 
             <TextView
-                android:id="@+id/textView2"
+                android:id="@+id/puntLetra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Malo" />
+                android:text="D" />
 
         </LinearLayout>
     </LinearLayout>
@@ -61,18 +61,36 @@
         android:id="@+id/textView3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Lista de pripiedades por 100 g\n" />
+        android:text="Lista de propiedades por 100 g\n" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/sal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Azucar: 100 g" />
+        android:text="Sal: 100 g" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/proteinas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Sal: 20 g" />
+        android:text="Proteinas: 20 g" />
+
+    <TextView
+        android:id="@+id/hidratos"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Carbohidratos: 20 g" />
+
+    <TextView
+        android:id="@+id/energia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Energia: 20 g" />
+
+    <TextView
+        android:id="@+id/saturadas"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Saturadas: 20 g" />
 
 </LinearLayout>
