@@ -44,7 +44,6 @@ public class BarcodeScanner extends AppCompatActivity {
     private static final int REQUEST_CAMERA_PERMISSION = 201;
     String intentData = "";
     private Comida comida;
-    private boolean finish = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,7 +112,7 @@ public class BarcodeScanner extends AppCompatActivity {
                             intentData = barcodes.valueAt(0).displayValue;
                             txtBarcodeValue.setText(intentData);
                         }
-                            readProperties(intentData);
+                        readProperties(intentData);
                     });
                 }
             }
@@ -191,39 +190,37 @@ public class BarcodeScanner extends AppCompatActivity {
         protected void onPostExecute(String result) {
             super.onPostExecute(result);
 
-
             String jsonString = result;
             JSONObject obj = null;
             try {
-                if(!finish) {
-                    obj = new JSONObject(jsonString);
-                    JSONObject jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
+                obj = new JSONObject(jsonString);
+                JSONObject jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
 
-                    String salt = jsonResponse.getString("salt_100g");
-                    String carbohydrates = jsonResponse.getString("carbohydrates_100g");
-                    String energy = jsonResponse.getString("energy-kcal_100g");
-                    String proteins = jsonResponse.getString("proteins_100g");
-                    String saturated = jsonResponse.getString("saturated-fat_100g");
-
-
-                    jsonResponse = obj.getJSONObject("product").getJSONObject("nutriscore_data");
-                    String scoreLetter = jsonResponse.getString("grade");
-                    String scoreNumber = jsonResponse.getString("score");
-
-                    jsonResponse = obj.getJSONObject("product");
-                    String nombre = jsonResponse.getString("product_name");
+                String salt = jsonResponse.getString("salt_100g");
+                String carbohydrates = jsonResponse.getString("carbohydrates_100g");
+                String energy = jsonResponse.getString("energy-kcal_100g");
+                String proteins = jsonResponse.getString("proteins_100g");
+                String saturated = jsonResponse.getString("saturated-fat_100g");
 
 
-                    String marca = jsonResponse.getString("brands");
+                jsonResponse = obj.getJSONObject("product").getJSONObject("nutriscore_data");
+                String scoreLetter = jsonResponse.getString("grade");
+                String scoreNumber = jsonResponse.getString("score");
 
-                    comida = new Comida(nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, scoreNumber, marca);
+                jsonResponse = obj.getJSONObject("product");
+                String nombre = jsonResponse.getString("product_name");
 
-                    Intent intent = new Intent(BarcodeScanner.this, PropiedadesActivity.class);
-                    intent.putExtra(COMIDA_SELE, comida);
-                    startActivity(intent);
-                }
 
-                finish = true;
+                String marca = jsonResponse.getString("brands");
+
+                String imagen = jsonResponse.getString("image_front_url");
+
+
+                comida = new Comida(nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, scoreNumber, marca, imagen);
+                Intent intent = new Intent(BarcodeScanner.this, PropiedadesActivity.class);
+                intent.putExtra(COMIDA_SELE, comida);
+                startActivity(intent);
+
 
             } catch (JSONException e) {
                 e.printStackTrace();
