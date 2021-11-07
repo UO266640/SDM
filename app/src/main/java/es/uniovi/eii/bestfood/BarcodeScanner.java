@@ -213,7 +213,10 @@ public class BarcodeScanner extends AppCompatActivity {
 
                 String marca = jsonResponse.getString("brands");
 
-                comida = new Comida(nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, scoreNumber, marca);
+                String imagen = jsonResponse.getString("image_front_url");
+
+
+                comida = new Comida(nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, scoreNumber, marca, imagen);
                 Intent intent = new Intent(BarcodeScanner.this, PropiedadesActivity.class);
                 intent.putExtra(COMIDA_SELE, comida);
                 startActivity(intent);

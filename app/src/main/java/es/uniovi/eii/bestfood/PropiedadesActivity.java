@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 public class PropiedadesActivity extends AppCompatActivity {
 
@@ -17,6 +21,7 @@ public class PropiedadesActivity extends AppCompatActivity {
     private TextView carbohydrates;
     private TextView saturadas;
     private TextView energia;
+    private ImageView caratulaimg;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +39,20 @@ public class PropiedadesActivity extends AppCompatActivity {
         carbohydrates = (TextView) findViewById(R.id.hidratos);
         saturadas = (TextView) findViewById(R.id.saturadas);
         energia = (TextView) findViewById(R.id.energia);
+        caratulaimg = (ImageView) findViewById(R.id.imagen);
 
         if (comida != null) {
             titulo.setText(comida.getNombre());
-            sal.setText("Sal: " + comida.getSalt());
-            proteinas.setText("Proteinas: " + comida.getProteins());
+            sal.setText("Sal: " + comida.getSalt()+" g");
+            proteinas.setText("Proteinas: " + comida.getProteins()+" g");
             puntuacion.setText("Puntuación: " + comida.getPuntuacion());
             punLetra.setText("Puntuación Nutriscore: " + comida.getScoreLetter());
             marca.setText(comida.getMarca());
-            carbohydrates.setText("Carbohidratos: " + comida.getCarbohydrates());
-            energia.setText("Energia: " + comida.getEnergy());
-            saturadas.setText("Grasas saturadas: " + comida.getSaturated());
+            carbohydrates.setText("Carbohidratos: " + comida.getCarbohydrates()+" g");
+            energia.setText("Energia: " + comida.getEnergy()+"kcal");
+            saturadas.setText("Grasas saturadas: " + comida.getSaturated()+" g");
 
+            Picasso.get().load(comida.getImagen()).into(caratulaimg);
 
         }
     }
