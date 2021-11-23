@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.squareup.picasso.Picasso;
+
 import java.util.List;
 
 public class ListaComidasAdapter extends RecyclerView.Adapter<ListaComidasAdapter.ComidaViewHolder> {
@@ -48,21 +50,18 @@ public class ListaComidasAdapter extends RecyclerView.Adapter<ListaComidasAdapte
 
     public class ComidaViewHolder extends RecyclerView.ViewHolder {
         private final TextView nombre;
-        private final TextView puntuacion;
         private ImageView imagen;
 
         public ComidaViewHolder(View itemView) {
             super(itemView);
             this.nombre = itemView.findViewById(R.id.nombrecomida);
-            this.puntuacion = itemView.findViewById(R.id.puntuacion);
-            // this.imagen = itemView.findViewById(R.id.imagen);
+             this.imagen = itemView.findViewById(R.id.imagen);
         }
 
         public void bindUser(final Comida comida, final OnItemClickListener listener) {
             nombre.setText(comida.getNombre());
-            puntuacion.setText(new StringBuilder().append(comida.getPuntuacion()).append(" ").append(puntuacion.getContext().getString(R.string.puntos)).toString());
 
-            // Picasso.get().load(comida.getUrlCaratula()).into(imagen);
+             Picasso.get().load(comida.getImagen()).into(imagen);
 
             itemView.setOnClickListener(view -> {
                 listener.onItemClick(comida);

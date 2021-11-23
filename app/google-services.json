@@ -1,33 +1,33 @@
 {
   "project_info": {
-    "project_number": "841101511105",
-    "project_id": "bestfood-49c6a",
-    "storage_bucket": "bestfood-49c6a.appspot.com"
+    "project_number": "185192352287",
+    "project_id": "bestfood-b4461",
+    "storage_bucket": "bestfood-b4461.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:841101511105:android:dd2db8afeed54e8364c740",
+        "mobilesdk_app_id": "1:185192352287:android:edee645c4da2eb5723a32a",
         "android_client_info": {
           "package_name": "es.uniovi.eii.bestfood"
         }
       },
       "oauth_client": [
         {
-          "client_id": "841101511105-et1vf5m77kc4ogm0kucm6k0nulpk8s0g.apps.googleusercontent.com",
+          "client_id": "185192352287-sojvvbjemblhg59hnnj1lgnitiv60fuf.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBPKOfYre4S-s68TiXVE3u2YuDVQ3PKBXM"
+          "current_key": "AIzaSyAkXpvQaoV1MeD7TELBojZB00CHGXGOYUA"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "841101511105-et1vf5m77kc4ogm0kucm6k0nulpk8s0g.apps.googleusercontent.com",
+              "client_id": "185192352287-sojvvbjemblhg59hnnj1lgnitiv60fuf.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

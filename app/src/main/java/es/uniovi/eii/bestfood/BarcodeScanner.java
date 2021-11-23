@@ -1,5 +1,7 @@
 package es.uniovi.eii.bestfood;
 
+import static android.content.ContentValues.TAG;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -22,6 +24,12 @@ import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,6 +41,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashMap;
+import java.util.List;
+import java.util.TimeZone;
 
 public class BarcodeScanner extends AppCompatActivity {
 
@@ -46,12 +57,18 @@ public class BarcodeScanner extends AppCompatActivity {
     private Comida comida;
     private boolean finish;
 
+
+    private DatabaseReference mDatabase;
+    String id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_barcode_scanner);
         txtBarcodeValue = findViewById(R.id.txtBarcodeValue);
         surfaceView = findViewById(R.id.surfaceView);
+
+
     }
 
 
@@ -113,6 +130,8 @@ public class BarcodeScanner extends AppCompatActivity {
                             intentData = barcodes.valueAt(0).displayValue;
                             txtBarcodeValue.setText(intentData);
                         }
+
+
                         readProperties(intentData);
                     });
                 }
@@ -195,7 +214,7 @@ public class BarcodeScanner extends AppCompatActivity {
             JSONObject obj = null;
             try {
 
-                if(!finish) {
+                if (!finish) {
                     obj = new JSONObject(jsonString);
                     JSONObject jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
 
@@ -224,6 +243,16 @@ public class BarcodeScanner extends AppCompatActivity {
                     intent.putExtra(COMIDA_SELE, comida);
                     startActivity(intent);
                     finish = true;
+
+                    mDatabase = FirebaseDatabase.getInstance().getReference();
+                    id = FirebaseAuth.getInstance().getUid();
+                    String key = mDatabase.push().getKey();
+
+                    mDatabase.child("users").child(id).child("barcode").child(key).child("id").setValue(jsonResponse.getString("_id"));
+                    mDatabase.child("users").child(id).child("barcode").child(key).child("nombre").setValue(nombre);
+                    mDatabase.child("users").child(id).child("barcode").child(key).child("imagen").setValue(imagen);
+
+
                     finish();
                 }
 

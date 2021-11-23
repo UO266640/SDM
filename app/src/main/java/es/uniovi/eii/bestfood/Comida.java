@@ -62,9 +62,9 @@ public class Comida implements Parcelable {
         this.imagen = imagen;
     }
 
-    public Comida(String nombre, String puntuacion) {
+    public Comida(String nombre, String imagen) {
         this.nombre = nombre;
-        this.puntuacion = puntuacion;
+        this.imagen= imagen;
     }
 
 
