@@ -248,9 +248,8 @@ public class BarcodeScanner extends AppCompatActivity {
                     id = FirebaseAuth.getInstance().getUid();
                     String key = mDatabase.push().getKey();
 
-                    mDatabase.child("users").child(id).child("barcode").child(key).child("id").setValue(jsonResponse.getString("_id"));
-                    mDatabase.child("users").child(id).child("barcode").child(key).child("nombre").setValue(nombre);
-                    mDatabase.child("users").child(id).child("barcode").child(key).child("imagen").setValue(imagen);
+                    mDatabase.child("users").child(id).child("barcode").child(jsonResponse.getString("_id")).child("nombre").setValue(nombre);
+                    mDatabase.child("users").child(id).child("barcode").child(jsonResponse.getString("_id")).child("imagen").setValue(imagen);
 
 
                     finish();
