@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.media.AudioManager;
@@ -272,8 +274,14 @@ public class BarcodeScanner extends AppCompatActivity {
 
                     finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Producto no encontrado", Toast.LENGTH_SHORT).show();
-                }
+                    cameraSource.stop();
+
+                    new AlertDialog.Builder(BarcodeScanner.this)
+                            .setTitle("BestFood")
+                            .setMessage("Producto no encontrado")
+                             .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
+                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .show();                }
 
 
             } catch (JSONException e) {
