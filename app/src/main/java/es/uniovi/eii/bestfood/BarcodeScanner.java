@@ -253,10 +253,7 @@ public class BarcodeScanner extends AppCompatActivity {
 
                     String id = jsonResponse.getString("_id");
                     comida = new Comida(id, nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, marca, imagen);
-                    Intent intent = new Intent(BarcodeScanner.this, PropiedadesActivity.class);
-                    intent.putExtra(COMIDA_SELE, comida);
-                    startActivity(intent);
-                    finish = true;
+
 
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     id = FirebaseAuth.getInstance().getUid();
@@ -272,6 +269,11 @@ public class BarcodeScanner extends AppCompatActivity {
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("saturated").setValue(saturated);
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("marca").setValue(marca);
 
+                    Intent intent = new Intent(BarcodeScanner.this, PropiedadesActivity.class);
+                    intent.putExtra(COMIDA_SELE, comida);
+                    startActivity(intent);
+                    finish = true;
+
                     finish();
                 } else {
                     cameraSource.stop();
@@ -279,7 +281,8 @@ public class BarcodeScanner extends AppCompatActivity {
                     new AlertDialog.Builder(BarcodeScanner.this)
                             .setTitle("BestFood")
                             .setMessage("Producto no encontrado")
-                             .setPositiveButton(android.R.string.ok, (dialog, which) -> finish())
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                dialog.dismiss(); finish();})
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();                }
 
