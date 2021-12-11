@@ -237,8 +237,8 @@ public class BarcodeScanner extends AppCompatActivity {
 
                     String imagen = jsonResponse.getString("image_front_url");
 
-
-                    comida = new Comida(nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, scoreNumber, marca, imagen);
+                    String id = jsonResponse.getString("_id");
+                    comida = new Comida(id, nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, marca, imagen);
                     Intent intent = new Intent(BarcodeScanner.this, PropiedadesActivity.class);
                     intent.putExtra(COMIDA_SELE, comida);
                     startActivity(intent);
@@ -248,11 +248,16 @@ public class BarcodeScanner extends AppCompatActivity {
                     id = FirebaseAuth.getInstance().getUid();
                     String key = mDatabase.push().getKey();
 
-
-
-                    mDatabase.child("users").child(id).child("barcode").child(jsonResponse.getString("_id")).child("nombre").setValue(nombre);
-                    mDatabase.child("users").child(id).child("barcode").child(jsonResponse.getString("_id")).child("imagen").setValue(imagen);
-
+                    String idd = jsonResponse.getString("_id");
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("nombre").setValue(nombre);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("imagen").setValue(imagen);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("scoreLetter").setValue(scoreLetter);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("salt").setValue(salt);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("proteins").setValue(proteins);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("carbohydrates").setValue(carbohydrates);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("energy").setValue(energy);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("saturated").setValue(saturated);
+                    mDatabase.child("users").child(id).child("barcode").child(idd).child("marca").setValue(marca);
 
                     finish();
                 }

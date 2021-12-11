@@ -53,6 +53,8 @@ public class MainActivity extends AppCompatActivity {
     private FloatingActionButton añadir;
     private DatabaseReference mDatabase;
     String id;
+    private Comida comida;
+    public static final String COMIDA_SELE = "";
 
 
     @Override
@@ -82,9 +84,20 @@ public class MainActivity extends AppCompatActivity {
                     DataSnapshot dataSnapshotChild = dataSnapshotsChat.next();
                     String nombre = dataSnapshotChild.child("nombre").getValue(String.class);
                     String imagen = dataSnapshotChild.child("imagen").getValue(String.class);
-                    // String id = dataSnapshotChild.child("id").getValue(String.class);
+                    String salt = dataSnapshotChild.child("salt").getValue(String.class);
+                    String carbohydrates = dataSnapshotChild.child("carbohydrates").getValue(String.class);
+                    String energy = dataSnapshotChild.child("energy").getValue(String.class);
+                    String proteins = dataSnapshotChild.child("proteins").getValue(String.class);
+                    String saturated = dataSnapshotChild.child("saturated").getValue(String.class);
 
-                    listaComida.add(new Comida(nombre, imagen));
+
+                    String scoreLetter = dataSnapshotChild.child("scoreLetter").getValue(String.class);
+                    String marca = dataSnapshotChild.child("marca").getValue(String.class);
+                    String idd = dataSnapshotChild.child("_id").getValue(String.class);
+
+                    comida = new Comida(idd, nombre, salt, proteins, carbohydrates, energy, saturated, scoreLetter, marca, imagen);
+
+                    listaComida.add(comida);
 
                 }
                 ListaComidasAdapter lpAdapter = new ListaComidasAdapter(listaComida, this::clickonItem);
@@ -94,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
             private void clickonItem(Comida comida) {
 
                 Intent intent = new Intent(MainActivity.this, PropiedadesActivity.class);
-                intent.putExtra("id", id);
+                intent.putExtra(COMIDA_SELE, comida);
                 startActivity(intent);
             }
 

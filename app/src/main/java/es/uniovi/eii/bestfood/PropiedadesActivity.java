@@ -13,7 +13,6 @@ import com.squareup.picasso.Picasso;
 public class PropiedadesActivity extends AppCompatActivity {
 
     private TextView titulo;
-    private TextView puntuacion;
     private TextView proteinas;
     private TextView sal;
     private TextView punLetra;
@@ -28,10 +27,14 @@ public class PropiedadesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_propiedades);
         Intent intent = getIntent();
+        Comida comida;
+        if (intent.getParcelableExtra(MainActivity.COMIDA_SELE) != null) {
+            comida = intent.getParcelableExtra(MainActivity.COMIDA_SELE);
 
-        Comida comida = intent.getParcelableExtra(BarcodeScanner.COMIDA_SELE);
+        } else {
+            comida = intent.getParcelableExtra(BarcodeScanner.COMIDA_SELE);
+        }
         titulo = (TextView) findViewById(R.id.NombreComida);
-        puntuacion = (TextView) findViewById(R.id.valor);
         proteinas = (TextView) findViewById(R.id.proteinas);
         sal = (TextView) findViewById(R.id.sal);
         punLetra = (TextView) findViewById(R.id.puntLetra);
@@ -43,14 +46,13 @@ public class PropiedadesActivity extends AppCompatActivity {
 
         if (comida != null) {
             titulo.setText(comida.getNombre());
-            sal.setText("Sal: " + comida.getSalt()+" g");
-            proteinas.setText("Proteinas: " + comida.getProteins()+" g");
-            puntuacion.setText("Puntuación: " + comida.getPuntuacion());
+            sal.setText("Sal: " + comida.getSalt() + " g");
+            proteinas.setText("Proteinas: " + comida.getProteins() + " g");
             punLetra.setText("Puntuación Nutriscore: " + comida.getScoreLetter());
             marca.setText(comida.getMarca());
-            carbohydrates.setText("Carbohidratos: " + comida.getCarbohydrates()+" g");
-            energia.setText("Energia: " + comida.getEnergy()+"kcal");
-            saturadas.setText("Grasas saturadas: " + comida.getSaturated()+" g");
+            carbohydrates.setText("Carbohidratos: " + comida.getCarbohydrates() + " g");
+            energia.setText("Energia: " + comida.getEnergy() + "kcal");
+            saturadas.setText("Grasas saturadas: " + comida.getSaturated() + " g");
 
             Picasso.get().load(comida.getImagen()).into(caratulaimg);
 

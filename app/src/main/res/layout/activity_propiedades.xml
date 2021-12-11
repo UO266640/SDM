@@ -43,12 +43,6 @@
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <TextView
-                android:id="@+id/valor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="0/10" />
-
-            <TextView
                 android:id="@+id/puntLetra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

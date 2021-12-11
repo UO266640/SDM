@@ -6,6 +6,7 @@ import android.os.Parcelable;
 public class Comida implements Parcelable {
 
 
+    String id;
     String nombre;
 
     String salt;
@@ -15,12 +16,13 @@ public class Comida implements Parcelable {
 
     String saturated;
     String scoreLetter;
-    String puntuacion;
 
     String marca;
     String imagen;
 
+
     protected Comida(Parcel in) {
+        id = in.readString();
         nombre = in.readString();
         salt = in.readString();
         proteins = in.readString();
@@ -28,7 +30,6 @@ public class Comida implements Parcelable {
         energy = in.readString();
         saturated = in.readString();
         scoreLetter = in.readString();
-        puntuacion = in.readString();
         marca = in.readString();
         imagen = in.readString();
     }
@@ -45,11 +46,16 @@ public class Comida implements Parcelable {
         }
     };
 
+    public String getId() {
+        return id;
+    }
+
     public String getImagen() {
         return imagen;
     }
 
-    public Comida(String nombre, String salt, String proteins, String carbohydrates, String energy, String saturated, String scoreLetter, String puntuacion, String marca, String imagen) {
+    public Comida(String id, String nombre, String salt, String proteins, String carbohydrates, String energy, String saturated, String scoreLetter, String marca, String imagen) {
+        this.id = id;
         this.nombre = nombre;
         this.salt = salt;
         this.proteins = proteins;
@@ -57,23 +63,19 @@ public class Comida implements Parcelable {
         this.energy = energy;
         this.saturated = saturated;
         this.scoreLetter = scoreLetter;
-        this.puntuacion = puntuacion;
         this.marca = marca;
         this.imagen = imagen;
     }
 
     public Comida(String nombre, String imagen) {
         this.nombre = nombre;
-        this.imagen= imagen;
+        this.imagen = imagen;
     }
-
-
 
 
     public String getMarca() {
         return marca;
     }
-
 
 
     public String getSalt() {
@@ -109,14 +111,6 @@ public class Comida implements Parcelable {
         this.nombre = nombre;
     }
 
-    public String getPuntuacion() {
-        return puntuacion;
-    }
-
-    public void setPuntuacion(String puntuacion) {
-        this.puntuacion = puntuacion;
-    }
-
 
     @Override
     public int describeContents() {
@@ -125,6 +119,7 @@ public class Comida implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
         dest.writeString(nombre);
         dest.writeString(salt);
         dest.writeString(proteins);
@@ -132,7 +127,6 @@ public class Comida implements Parcelable {
         dest.writeString(energy);
         dest.writeString(saturated);
         dest.writeString(scoreLetter);
-        dest.writeString(puntuacion);
         dest.writeString(marca);
         dest.writeString(imagen);
     }
