@@ -1,5 +1,6 @@
 package es.uniovi.eii.bestfood;
 
+import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
@@ -10,15 +11,15 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.core.app.ActivityCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 import java.util.regex.Pattern;
 
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
+    private static final int REQUEST_CAMERA_PERMISSION = 201;
 
 
     public void register(String user, String pass) {
@@ -61,6 +62,10 @@ public class Login extends AppCompatActivity {
         final Button register = findViewById(R.id.register);
         final EditText user = findViewById(R.id.username);
         final EditText pass = findViewById(R.id.password);
+
+
+        ActivityCompat.requestPermissions(Login.this, new
+                String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
