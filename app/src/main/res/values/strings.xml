@@ -19,6 +19,9 @@
     <string name="registrarse">registrarse</string>
     <string name="iniciar_sesion">iniciar sesion</string>
     <string name="contrase_a">Contraseña</string>
-    <string name="passvacia">Contraseña vacia o menor a 6 caracteres</string>
+    <string name="passvacia">Contraseña vacía</string>
+    <string name="passmin6">Contraseña con menos de 6 caracteres</string>
     <string name="usinc">Usuario o contraseña incorrectos</string>
-    <string name="correoya">Correo ya registrado o erroneo</string></resources>
+    <string name="correoya">Correo ya registrado o erroneo</string>
+    <string name="correonovalido">Correo no válido</string>
+</resources>
