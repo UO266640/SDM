@@ -131,8 +131,20 @@ public class BarcodeScanner extends AppCompatActivity {
                             txtBarcodeValue.setText(intentData);
                         }
 
+                        cameraSource.stop();
 
                         readProperties(intentData);
+                        try {
+                            if (ActivityCompat.checkSelfPermission(BarcodeScanner.this, Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                                cameraSource.start(surfaceView.getHolder());
+                            } else {
+                                ActivityCompat.requestPermissions(BarcodeScanner.this, new
+                                        String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
+                            }
+
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
                     });
                 }
             }
@@ -214,7 +226,7 @@ public class BarcodeScanner extends AppCompatActivity {
             JSONObject obj = null;
             try {
 
-                if (!finish) {
+                if (!finish && result != null) {
                     obj = new JSONObject(jsonString);
                     JSONObject jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
 
@@ -246,7 +258,6 @@ public class BarcodeScanner extends AppCompatActivity {
 
                     mDatabase = FirebaseDatabase.getInstance().getReference();
                     id = FirebaseAuth.getInstance().getUid();
-                    String key = mDatabase.push().getKey();
 
                     String idd = jsonResponse.getString("_id");
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("nombre").setValue(nombre);
@@ -260,6 +271,8 @@ public class BarcodeScanner extends AppCompatActivity {
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("marca").setValue(marca);
 
                     finish();
+                } else {
+                    Toast.makeText(getApplicationContext(), "Producto no encontrado", Toast.LENGTH_SHORT).show();
                 }
 
 
