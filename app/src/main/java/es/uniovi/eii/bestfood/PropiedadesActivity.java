@@ -49,7 +49,7 @@ public class PropiedadesActivity extends AppCompatActivity {
             sal.setText("Sal: " + comida.getSalt() + " g");
             proteinas.setText("Proteinas: " + comida.getProteins() + " g");
             punLetra.setText("Puntuación Nutriscore: " + comida.getScoreLetter());
-            marca.setText(comida.getMarca());
+            marca.setText("Marca: " + comida.getMarca());
             carbohydrates.setText("Carbohidratos: " + comida.getCarbohydrates() + " g");
             energia.setText("Energia: " + comida.getEnergy() + "kcal");
             saturadas.setText("Grasas saturadas: " + comida.getSaturated() + " g");

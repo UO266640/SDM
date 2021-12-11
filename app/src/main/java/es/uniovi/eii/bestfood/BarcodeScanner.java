@@ -232,22 +232,64 @@ public class BarcodeScanner extends AppCompatActivity {
                     obj = new JSONObject(jsonString);
                     JSONObject jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
 
-                    String salt = jsonResponse.getString("salt_100g");
-                    String carbohydrates = jsonResponse.getString("carbohydrates_100g");
-                    String energy = jsonResponse.getString("energy-kcal_100g");
-                    String proteins = jsonResponse.getString("proteins_100g");
-                    String saturated = jsonResponse.getString("saturated-fat_100g");
+
+                    String salt;
+                    if (jsonResponse.has("salt_100g")) {
+                        salt = jsonResponse.getString("salt_100g");
+                    } else {
+                        salt = "Sin datos";
+                    }
+                    String carbohydrates;
+                    if (jsonResponse.has("carbohydrates_100g")) {
+                        carbohydrates = jsonResponse.getString("carbohydrates_100g");
+                    } else {
+                        carbohydrates = "Sin datos";
+                    }
+                    String energy;
+
+                    if (jsonResponse.has("energy-kcal_100g")) {
+                        energy = jsonResponse.getString("energy-kcal_100g");
+                    } else {
+                        energy = "Sin datos";
+                    }
+                    String proteins;
+                    if (jsonResponse.has("proteins_100g")) {
+                        proteins = jsonResponse.getString("proteins_100g");
+                    } else {
+                        proteins = "Sin datos";
+                    }
+
+                    String saturated;
+                    if (jsonResponse.has("saturated-fat_100g")) {
+                        saturated = jsonResponse.getString("saturated-fat_100g");
+                    } else {
+                        saturated = "Sin datos";
+                    }
 
 
-                    jsonResponse = obj.getJSONObject("product").getJSONObject("nutriscore_data");
-                    String scoreLetter = jsonResponse.getString("grade");
-                    String scoreNumber = jsonResponse.getString("score");
+                    String scoreLetter;
+                    if (jsonResponse.has("nutriscore_data")) {
+                        scoreLetter = jsonResponse.getString("nutriscore_data");
+                    } else {
+                        scoreLetter = "Sin datos";
+                    }
 
                     jsonResponse = obj.getJSONObject("product");
-                    String nombre = jsonResponse.getString("product_name");
 
+                    String nombre;
+                    if (jsonResponse.has("product_name")) {
+                        nombre = jsonResponse.getString("product_name");
+                    } else {
+                        nombre = "Sin datos";
+                    }
 
-                    String marca = jsonResponse.getString("brands");
+                    String marca;
+                    if (jsonResponse.has("brands")) {
+                        marca = jsonResponse.getString("brands");
+                    } else {
+                        marca = "Sin datos";
+                    }
+
 
                     String imagen = jsonResponse.getString("image_front_url");
 
@@ -282,9 +324,12 @@ public class BarcodeScanner extends AppCompatActivity {
                             .setTitle("BestFood")
                             .setMessage("Producto no encontrado")
                             .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                                dialog.dismiss(); finish();})
+                                dialog.dismiss();
+                                finish();
+                            })
                             .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();                }
+                            .show();
+                }
 
 
             } catch (JSONException e) {
