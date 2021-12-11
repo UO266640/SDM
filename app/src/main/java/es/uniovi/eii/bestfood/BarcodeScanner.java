@@ -1,37 +1,26 @@
 package es.uniovi.eii.bestfood;
 
-import static android.content.ContentValues.TAG;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.media.AudioManager;
-import android.media.ToneGenerator;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.util.SparseArray;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
 import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,9 +32,6 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.HashMap;
-import java.util.List;
-import java.util.TimeZone;
 
 public class BarcodeScanner extends AppCompatActivity {
 
@@ -58,10 +44,10 @@ public class BarcodeScanner extends AppCompatActivity {
     String intentData = "";
     private Comida comida;
     private boolean finish;
+    private AlertDialog ad;
 
 
     private DatabaseReference mDatabase;
-    String id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -163,12 +149,15 @@ public class BarcodeScanner extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         cameraSource.release();
+
+
     }
 
     @Override
     protected void onResume() {
         super.onResume();
         initialiseDetectorsAndSources();
+
     }
 
     private class JsonTask extends AsyncTask<String, String, String> {
@@ -291,7 +280,14 @@ public class BarcodeScanner extends AppCompatActivity {
                     }
 
 
-                    String imagen = jsonResponse.getString("image_front_url");
+
+                    String imagen;
+                    if (jsonResponse.has("image_front_url")) {
+                        imagen = jsonResponse.getString("image_front_url");
+                    } else {
+                        imagen = "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg";
+                    }
+
 
                     String id = jsonResponse.getString("_id");
                     comida = new Comida(id, nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, marca, imagen);
@@ -320,13 +316,13 @@ public class BarcodeScanner extends AppCompatActivity {
                 } else {
                     cameraSource.stop();
 
-                    new AlertDialog.Builder(BarcodeScanner.this)
+                    ad =  new AlertDialog.Builder(BarcodeScanner.this)
                             .setTitle("BestFood")
                             .setMessage("Producto no encontrado")
-                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            .setPositiveButton(android.R.string.ok, (dialog, which) ->{
                                 dialog.dismiss();
-                                finish();
-                            })
+                                finish();}
+                            )
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
                 }

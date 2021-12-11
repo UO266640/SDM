@@ -1,12 +1,11 @@
 package es.uniovi.eii.bestfood;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
 
@@ -34,15 +33,15 @@ public class PropiedadesActivity extends AppCompatActivity {
         } else {
             comida = intent.getParcelableExtra(BarcodeScanner.COMIDA_SELE);
         }
-        titulo = (TextView) findViewById(R.id.NombreComida);
-        proteinas = (TextView) findViewById(R.id.proteinas);
-        sal = (TextView) findViewById(R.id.sal);
-        punLetra = (TextView) findViewById(R.id.puntLetra);
-        marca = (TextView) findViewById(R.id.marca);
-        carbohydrates = (TextView) findViewById(R.id.hidratos);
-        saturadas = (TextView) findViewById(R.id.saturadas);
-        energia = (TextView) findViewById(R.id.energia);
-        caratulaimg = (ImageView) findViewById(R.id.imagen);
+        titulo = findViewById(R.id.NombreComida);
+        proteinas = findViewById(R.id.proteinas);
+        sal = findViewById(R.id.sal);
+        punLetra = findViewById(R.id.puntLetra);
+        marca = findViewById(R.id.marca);
+        carbohydrates = findViewById(R.id.hidratos);
+        saturadas = findViewById(R.id.saturadas);
+        energia = findViewById(R.id.energia);
+        caratulaimg = findViewById(R.id.imagen);
 
         if (comida != null) {
             titulo.setText(comida.getNombre());
