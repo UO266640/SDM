@@ -249,7 +249,7 @@ public class BarcodeScanner extends AppCompatActivity {
                     String key = mDatabase.push().getKey();
 
 
-                    
+
                     mDatabase.child("users").child(id).child("barcode").child(jsonResponse.getString("_id")).child("nombre").setValue(nombre);
                     mDatabase.child("users").child(id).child("barcode").child(jsonResponse.getString("_id")).child("imagen").setValue(imagen);
 
