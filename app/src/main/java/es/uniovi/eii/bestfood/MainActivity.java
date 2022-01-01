@@ -93,9 +93,8 @@ public class MainActivity extends AppCompatActivity {
 
                     String scoreLetter = dataSnapshotChild.child("scoreLetter").getValue(String.class);
                     String marca = dataSnapshotChild.child("marca").getValue(String.class);
-                    String idd = dataSnapshotChild.child("_id").getValue(String.class);
 
-                    comida = new Comida(idd, nombre, salt, proteins, carbohydrates, energy, saturated, scoreLetter, marca, imagen);
+                    comida = new Comida(dataSnapshotChild.getKey(), nombre, salt, proteins, carbohydrates, energy, saturated, scoreLetter, marca, imagen);
 
                     listaComida.add(comida);
 

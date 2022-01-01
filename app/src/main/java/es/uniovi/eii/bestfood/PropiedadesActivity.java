@@ -2,6 +2,7 @@ package es.uniovi.eii.bestfood;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -77,7 +78,7 @@ public class PropiedadesActivity extends AppCompatActivity {
                 mDatabase.child("users").child(id).child("barcode").child(barcode).removeValue();
 
                 Intent intent2 = new Intent(this, MainActivity.class);
-                startActivity(intent2);
+               startActivity(intent2);
             }
         });
     }
