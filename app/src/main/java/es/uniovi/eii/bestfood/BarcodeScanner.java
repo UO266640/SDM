@@ -288,15 +288,15 @@ public class BarcodeScanner extends AppCompatActivity {
                         imagen = "https://uh.edu/pharmacy/_images/directory-staff/no-image-available.jpg";
                     }
 
+                    String idd = jsonResponse.getString("_id");
 
-                    String id = jsonResponse.getString("_id");
-                    comida = new Comida(id, nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, marca, imagen);
+
+                    comida = new Comida(idd, nombre, salt, carbohydrates, energy, proteins, saturated, scoreLetter, marca, imagen);
 
 
                     mDatabase = FirebaseDatabase.getInstance().getReference();
-                    id = FirebaseAuth.getInstance().getUid();
+                    String id = FirebaseAuth.getInstance().getUid();
 
-                    String idd = jsonResponse.getString("_id");
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("nombre").setValue(nombre);
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("imagen").setValue(imagen);
                     mDatabase.child("users").child(id).child("barcode").child(idd).child("scoreLetter").setValue(scoreLetter);

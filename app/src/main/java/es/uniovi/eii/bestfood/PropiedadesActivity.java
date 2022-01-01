@@ -2,8 +2,6 @@ package es.uniovi.eii.bestfood;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -18,8 +16,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
-
-import java.util.Iterator;
 
 public class PropiedadesActivity extends AppCompatActivity {
 
@@ -74,39 +70,11 @@ public class PropiedadesActivity extends AppCompatActivity {
             Picasso.get().load(comida.getImagen()).into(caratulaimg);
 
         }
-        botonBorrar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                if (comida != null) {
-                    mDatabase = FirebaseDatabase.getInstance().getReference("");
-                    id = FirebaseAuth.getInstance().getUid();
-
-                    mDatabase.child("users").child(id).addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            Iterator<DataSnapshot> dataSnapshotsChat = dataSnapshot.child("barcode").getChildren().iterator();
-
-                            while (dataSnapshotsChat.hasNext()) {
-                                DataSnapshot dataSnapshotChild = dataSnapshotsChat.next();
-
-                                if (dataSnapshotChild.getKey().equals(barcode)) {
-                                    dataSnapshotChild.getRef().removeValue();
-                                    cambiarPantalla();
-                                    break;
-
-                                }
-                            }
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-
-
-                    });
-                }
+        botonBorrar.setOnClickListener(v -> {
+            if (comida != null) {
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                id = FirebaseAuth.getInstance().getUid();
+                mDatabase.child("users").child(id).child("barcode").child(barcode).removeValue();
             }
         });
     }
