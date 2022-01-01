@@ -75,14 +75,11 @@ public class PropiedadesActivity extends AppCompatActivity {
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 id = FirebaseAuth.getInstance().getUid();
                 mDatabase.child("users").child(id).child("barcode").child(barcode).removeValue();
+
+                Intent intent2 = new Intent(this, MainActivity.class);
+                startActivity(intent2);
             }
         });
     }
 
-    private void cambiarPantalla() {
-
-
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
 }
