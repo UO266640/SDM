@@ -67,19 +67,46 @@
             android:id="@+id/sal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Sal: 100 g" />
+            android:text="Sal:" />
+
+        <EditText
+            android:id="@+id/editTextSal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="" />
 
         <TextView
             android:id="@+id/proteinas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Proteinas: 20 g" />
+            android:text="Proteinas:" />
+
+        <EditText
+            android:id="@+id/editTextProteinas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="" />
 
         <TextView
             android:id="@+id/hidratos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Carbohidratos: 20 g" />
+            android:text="Carbohidratos:" />
+
+        <EditText
+            android:id="@+id/editTextCarbohidratos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="" />
 
         <TextView
             android:id="@+id/energia"
@@ -87,11 +114,29 @@
             android:layout_height="wrap_content"
             android:text="Energia: 20 g" />
 
+        <EditText
+            android:id="@+id/editTextEnergia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="" />
+
         <TextView
             android:id="@+id/saturadas"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Saturadas: 20 g" />
+            android:text="Saturadas:" />
+
+        <EditText
+            android:id="@+id/editTextSaturadas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:text="" />
 
     </LinearLayout>
 
@@ -100,29 +145,13 @@
         android:layout_height="match_parent">
 
         <Button
-            android:id="@+id/btBorrar"
+            android:id="@+id/btnOK"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-            android:layout_alignParentTop="true"
-            android:layout_alignParentEnd="true"
-            android:layout_marginTop="71dp"
-            android:layout_marginEnd="157dp"
-            android:text="Borrar" />
-
-        <Button
-            android:id="@+id/btnEditar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true"
             android:layout_alignParentBottom="true"
-            android:layout_marginStart="133dp"
-            android:layout_marginTop="-127dp"
-            android:layout_marginEnd="152dp"
-            android:layout_marginBottom="235dp"
-            android:text="Editar" />
-
+            android:layout_centerInParent="true"
+            android:text="Aceptar" />
     </RelativeLayout>
 
 </LinearLayout>

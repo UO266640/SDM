@@ -24,7 +24,7 @@ public class PropiedadesActivity extends AppCompatActivity {
     private TextView saturadas;
     private TextView energia;
     private ImageView caratulaimg;
-    private Button botonBorrar;
+    private Button botonBorrar, botonEditar;
     private DatabaseReference mDatabase;
     private String id;
     private String barcode;
@@ -51,6 +51,8 @@ public class PropiedadesActivity extends AppCompatActivity {
         energia = findViewById(R.id.energia);
         caratulaimg = findViewById(R.id.imagen);
         botonBorrar = findViewById(R.id.btBorrar);
+        botonEditar = findViewById(R.id.btnEditar);
+
 
         if (comida != null) {
             barcode = comida.getId();
@@ -71,6 +73,16 @@ public class PropiedadesActivity extends AppCompatActivity {
                 mDatabase = FirebaseDatabase.getInstance().getReference();
                 id = FirebaseAuth.getInstance().getUid();
                 mDatabase.child("users").child(id).child("barcode").child(barcode).removeValue();
+                finish();
+            }
+        });
+
+        botonEditar.setOnClickListener(v -> {
+            if (comida != null) {
+                Intent intent2 = new Intent(this, EditComidaActivity.class);
+                startActivity(intent2);
+                intent2.putExtra("editar", comida);
+
                 finish();
             }
         });
