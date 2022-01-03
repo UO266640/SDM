@@ -37,12 +37,12 @@ public class EditComidaActivity extends AppCompatActivity {
         botonAceptar = findViewById(R.id.btnOK);
         punLetra = findViewById(R.id.puntLetra);
         caratulaimg = findViewById(R.id.imagen);
+        marca = findViewById(R.id.marca);
 
         Intent intent = getIntent();
         if (intent.getParcelableExtra("editar") != null) {
             comida = intent.getParcelableExtra("editar");
-            marca = findViewById(R.id.marca);
-
+            marca.setText("Marca: " + comida.getMarca());
             sal.setText(comida.getSalt());
             proteinas.setText(comida.getProteins());
             carbohidratos.setText(comida.getCarbohydrates());
