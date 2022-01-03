@@ -29,6 +29,7 @@ public class PropiedadesActivity extends AppCompatActivity {
     private String id;
     private String barcode;
     Comida comida;
+    public static final String COMIDA_SELE = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +81,9 @@ public class PropiedadesActivity extends AppCompatActivity {
         botonEditar.setOnClickListener(v -> {
             if (comida != null) {
                 Intent intent2 = new Intent(this, EditComidaActivity.class);
-                startActivity(intent2);
                 intent2.putExtra("editar", comida);
+
+                startActivity(intent2);
 
                 finish();
             }
