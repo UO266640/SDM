@@ -1,5 +1,7 @@
 package es.uniovi.eii.bestfood;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -70,12 +72,26 @@ public class PropiedadesActivity extends AppCompatActivity {
 
         }
         botonBorrar.setOnClickListener(v -> {
-            if (comida != null) {
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                id = FirebaseAuth.getInstance().getUid();
-                mDatabase.child("users").child(id).child("barcode").child(barcode).removeValue();
-                finish();
-            }
+            AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+
+            alertDialogBuilder.setTitle("Best Food");
+            alertDialogBuilder
+                    .setMessage("¿Deseas borrar el producto?")
+                    .setCancelable(false)
+                    .setPositiveButton("Si",new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog,int which) {
+                            if (comida != null) {
+                                mDatabase = FirebaseDatabase.getInstance().getReference();
+                                id = FirebaseAuth.getInstance().getUid();
+                                mDatabase.child("users").child(id).child("barcode").child(barcode).removeValue();
+                                finish();
+                            }
+                        }
+                    })
+                    .setNegativeButton("No", (dialog, id) -> dialog.cancel()).create().show();
+
+
+
         });
 
         botonEditar.setOnClickListener(v -> {
