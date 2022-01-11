@@ -112,7 +112,7 @@
             android:id="@+id/energia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Energia: 20 g" />
+            android:text="Energia:" />
 
         <EditText
             android:id="@+id/editTextEnergia"
