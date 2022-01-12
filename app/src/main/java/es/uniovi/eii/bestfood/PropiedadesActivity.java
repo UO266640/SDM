@@ -65,7 +65,7 @@ public class PropiedadesActivity extends AppCompatActivity {
             punLetra.setText("Puntuación Nutriscore: " + comida.getScoreLetter());
             marca.setText("Marca: " + comida.getMarca());
             carbohydrates.setText("Carbohidratos: " + comida.getCarbohydrates() + " g");
-            energia.setText("Energia: " + comida.getEnergy() + "kcal");
+            energia.setText("Energia: " + comida.getEnergy() + " kcal");
             saturadas.setText("Grasas saturadas: " + comida.getSaturated() + " g");
 
             Picasso.get().load(comida.getImagen()).into(caratulaimg);
