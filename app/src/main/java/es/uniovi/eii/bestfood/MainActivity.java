@@ -1,5 +1,6 @@
 package es.uniovi.eii.bestfood;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.vision.barcode.Barcode;
+import com.google.android.gms.vision.barcode.BarcodeDetector;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -33,13 +36,16 @@ public class MainActivity extends AppCompatActivity {
     String id;
     private Comida comida;
     public static final String COMIDA_SELE = "";
+    private BarcodeDetector barcodeDetector;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
+        barcodeDetector = new BarcodeDetector.Builder(this)
+                .setBarcodeFormats(Barcode.ALL_FORMATS)
+                .build();
 
 
         listaComidaView = findViewById(R.id.recyclerView);
@@ -99,8 +105,20 @@ public class MainActivity extends AppCompatActivity {
         añadir = findViewById(R.id.floatingActionButton);
 
         añadir.setOnClickListener(view -> {
-            Intent intent = new Intent(this, BarcodeScanner.class);
-            startActivity(intent);
+            if (barcodeDetector.isOperational()) {
+                Intent intent = new Intent(this, BarcodeScanner.class);
+                startActivity(intent);
+            } else {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("BestFood")
+                        .setMessage("Se estan descargando las liberías de deteccíon de codigos de barras, este proceso puede durar unos pocos minutos por primera vez si tu dispositivo es lento o antiguo")
+                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                    dialog.dismiss();
+                                }
+                        )
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
         });
 
 

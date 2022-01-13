@@ -315,7 +315,7 @@ public class BarcodeScanner extends AppCompatActivity {
                     finish = true;
 
                     finish();
-                } else {
+                } else if (!finish) {
                     cameraSource.stop();
 
                     ad = new AlertDialog.Builder(BarcodeScanner.this)
@@ -333,8 +333,8 @@ public class BarcodeScanner extends AppCompatActivity {
 
             } catch (JSONException e) {
                 e.printStackTrace();
+            } catch (Exception e) {
             }
-
         }
     }
 
