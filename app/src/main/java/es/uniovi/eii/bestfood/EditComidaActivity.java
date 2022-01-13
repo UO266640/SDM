@@ -14,6 +14,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import es.uniovi.eii.bestfood.modelo.Comida;
+
 public class EditComidaActivity extends AppCompatActivity {
     Comida comida;
     EditText sal, proteinas, carbohidratos, energia, saturadas;

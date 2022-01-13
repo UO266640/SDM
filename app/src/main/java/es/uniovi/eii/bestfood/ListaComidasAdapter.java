@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
+import es.uniovi.eii.bestfood.modelo.Comida;
+
 public class ListaComidasAdapter extends RecyclerView.Adapter<ListaComidasAdapter.ComidaViewHolder> {
 
     private final List<Comida> listaComidas;

@@ -15,6 +15,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
+import es.uniovi.eii.bestfood.modelo.Comida;
+
 public class PropiedadesActivity extends AppCompatActivity {
 
     private TextView titulo;

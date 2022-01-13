@@ -33,6 +33,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import es.uniovi.eii.bestfood.modelo.Comida;
+
 public class BarcodeScanner extends AppCompatActivity {
 
     public static final String COMIDA_SELE = "comida";
@@ -219,8 +221,16 @@ public class BarcodeScanner extends AppCompatActivity {
 
                 if (!finish && result != null) {
                     obj = new JSONObject(jsonString);
-                    JSONObject jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
+                    JSONObject jsonResponse = obj.getJSONObject("product");
 
+                    String scoreLetter;
+                    if (jsonResponse.has("nutriscore_grade")) {
+                        scoreLetter = jsonResponse.getString("nutriscore_grade");
+                    } else {
+                        scoreLetter = "Sin datos";
+                    }
+
+                    jsonResponse = obj.getJSONObject("product").getJSONObject("nutriments");
 
                     String salt;
                     if (jsonResponse.has("salt_100g")) {
@@ -256,12 +266,7 @@ public class BarcodeScanner extends AppCompatActivity {
                     }
 
 
-                    String scoreLetter;
-                    if (jsonResponse.has("nutriscore_data")) {
-                        scoreLetter = jsonResponse.getString("nutriscore_data");
-                    } else {
-                        scoreLetter = "Sin datos";
-                    }
+
 
                     jsonResponse = obj.getJSONObject("product");
 
