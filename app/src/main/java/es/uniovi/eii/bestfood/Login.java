@@ -1,7 +1,11 @@
 package es.uniovi.eii.bestfood;
 
 import android.Manifest;
+import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.animation.Animation;
@@ -13,6 +17,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.regex.Pattern;
@@ -20,6 +26,7 @@ import java.util.regex.Pattern;
 public class Login extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private static final int REQUEST_CAMERA_PERMISSION = 201;
+    private static final int PLAY_SERVICES_RESOLUTION_REQUEST = 9000;
 
 
     public void register(String user, String pass) {
@@ -64,6 +71,18 @@ public class Login extends AppCompatActivity {
         final EditText pass = findViewById(R.id.password);
 
 
+        if (!getConexion()) {
+            mostrarNoConexion();
+        }
+
+        int result = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this, 213655000);
+
+        if (result != ConnectionResult.SUCCESS) {
+            if (GoogleApiAvailability.getInstance().isUserResolvableError(result)) {
+                GoogleApiAvailability.getInstance().getErrorDialog(this, result, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+            }
+        }
+
         ActivityCompat.requestPermissions(Login.this, new
                 String[]{Manifest.permission.CAMERA}, REQUEST_CAMERA_PERMISSION);
 
@@ -71,19 +90,63 @@ public class Login extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
 
         login.setOnClickListener(v -> {
-            if (comprobarDatos(user, pass))
 
-                login(user.getText().toString(), pass.getText().toString());
+            if (!getConexion()) {
+                mostrarNoConexion();
+            }
+            int result2 = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this, 213655000);
 
+            if (result2 != ConnectionResult.SUCCESS) {
+                if (GoogleApiAvailability.getInstance().isUserResolvableError(result2)) {
+                    GoogleApiAvailability.getInstance().getErrorDialog(this, result2, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                }
+            } else {
+                if (comprobarDatos(user, pass))
+                    login(user.getText().toString(), pass.getText().toString());
+            }
         });
 
         register.setOnClickListener(v -> {
-            if (comprobarDatos(user, pass))
+            int result3 = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this, 213655000);
 
-                register(user.getText().toString(), pass.getText().toString());
+            if (!getConexion()) {
+                mostrarNoConexion();
+            }
+            if (result3 != ConnectionResult.SUCCESS) {
+                if (GoogleApiAvailability.getInstance().isUserResolvableError(result3)) {
+                    GoogleApiAvailability.getInstance().getErrorDialog(this, result3, PLAY_SERVICES_RESOLUTION_REQUEST).show();
+                }
+            } else {
+                if (comprobarDatos(user, pass))
+
+                    register(user.getText().toString(), pass.getText().toString());
+            }
         });
 
 
+    }
+
+    public boolean getConexion() {
+
+        ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).getState() == NetworkInfo.State.CONNECTED ||
+                connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI).getState() == NetworkInfo.State.CONNECTED) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void mostrarNoConexion() {
+        new AlertDialog.Builder(Login.this)
+                .setTitle("BestFood")
+                .setMessage("Es necesario que tengas conexión a internet para que la aplicación funcione")
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                            dialog.dismiss();
+                        }
+                )
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
     }
 
     public boolean comprobarDatos(EditText user, EditText pass) {

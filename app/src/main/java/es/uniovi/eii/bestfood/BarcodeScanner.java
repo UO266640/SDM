@@ -266,8 +266,6 @@ public class BarcodeScanner extends AppCompatActivity {
                     }
 
 
-
-
                     jsonResponse = obj.getJSONObject("product");
 
                     String nombre;
@@ -283,7 +281,6 @@ public class BarcodeScanner extends AppCompatActivity {
                     } else {
                         marca = "Sin datos";
                     }
-
 
 
                     String imagen;
@@ -321,12 +318,13 @@ public class BarcodeScanner extends AppCompatActivity {
                 } else {
                     cameraSource.stop();
 
-                    ad =  new AlertDialog.Builder(BarcodeScanner.this)
+                    ad = new AlertDialog.Builder(BarcodeScanner.this)
                             .setTitle("BestFood")
                             .setMessage("Producto no encontrado")
-                            .setPositiveButton(android.R.string.ok, (dialog, which) ->{
-                                dialog.dismiss();
-                                finish();}
+                            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                                        dialog.dismiss();
+                                        finish();
+                                    }
                             )
                             .setIcon(android.R.drawable.ic_dialog_alert)
                             .show();
